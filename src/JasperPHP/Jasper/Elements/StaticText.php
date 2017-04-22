@@ -41,22 +41,44 @@ class StaticText implements ElementInterface
         }
     }
 
+    private function HexToRGB($hex)
+    {
+
+        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+        echo "$hex -> $r $g $b";
+    }
+
+    private function bold()
+    {
+        $bold = '';
+        if (isset($element['textElement']['font']['@attributes']['isBold']) &&
+            $element['textElement']['font']['@attributes']['isBold'] == 'true'){
+            $bold = 'B';
+        } elseif (isset($element['textElement']['font']['@attributes']['isItalic']) &&
+            $element['textElement']['font']['@attributes']['isItalic'] == 'true'){
+            $bold = 'I';
+        } elseif (isset($element['textElement']['font']['@attributes']['isUnderline']) &&
+            $element['textElement']['font']['@attributes']['isUnderline'] == 'true'){
+            $bold = 'U';
+        }
+        return $bold;
+    }
+
     private function text($element)
     {
         if (isset($element['textElement'])){
-            $this->font = $element['textElement']['font']['@attributes']['fontName'];
 
-            $isBold = $element['textElement']['font']['@attributes']['isBold'];
-            if ($isBold){
-
+            if (isset($element['textElement']['font']['@attributes']['fontName'])){
+                $this->font = $element['textElement']['font']['@attributes']['fontName'];
             }
-        }
 
+
+        }
         $text = $element['text'];
         $width = $element['reportElement']['@attributes']['width'];
         $height = $element['reportElement']['@attributes']['height'];
 
-        $this->pdf->SetFont($this->font, 'B', 10);
+        $this->pdf->SetFont($this->font, $this->bold(), 10);
         $this->pdf->Cell($width, $height, $text);
     }
 
@@ -66,5 +88,6 @@ class StaticText implements ElementInterface
             $this->position($element);
             $this->text($element);
         }
+        //die();
     }
 }
