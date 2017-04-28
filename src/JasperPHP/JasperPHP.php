@@ -3,6 +3,7 @@
 namespace JasperPHP;
 
 use JasperPHP\Jasper\Band;
+use JasperPHP\Utils\XmlToArray;
 
 /**
  * Class JasperPHP
@@ -28,7 +29,7 @@ class JasperPHP
      */
     public function __construct()
     {
-        $this->pdf = new \FPDF('P', 'pt');
+        $this->pdf = new JFPDF('P', 'pt');
     }
 
     /**

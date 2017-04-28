@@ -3,6 +3,7 @@
 namespace JasperPHP\Jasper;
 
 use JasperPHP\Factory\BandFactory;
+use JasperPHP\JFPDF;
 
 /**
  * Class Band
@@ -11,7 +12,7 @@ use JasperPHP\Factory\BandFactory;
 class Band
 {
     /**
-     * @var
+     * @var JFPDF
      */
     private $pdf;
     /**
@@ -24,7 +25,7 @@ class Band
      * @param $pdf
      * @param $jasper
      */
-    public function __construct($pdf, $jasper)
+    public function __construct(JFPDF $pdf, $jasper)
     {
         $this->pdf = $pdf;
         $this->jasper = $jasper;

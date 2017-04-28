@@ -3,6 +3,7 @@
 namespace JasperPHP\Factory;
 
 use JasperPHP\Jasper\Elements\StaticText;
+use JasperPHP\JFPDF;
 
 
 /**
@@ -30,10 +31,10 @@ class BandFactory
 
     /**
      * BandFactoryMethod constructor.
-     * @param $pdf
+     * @param JFPDF $pdf
      * @param $jasper
      */
-    public function __construct($pdf, $jasper)
+    public function __construct(JFPDF $pdf, $jasper)
     {
         $this->pdf = $pdf;
         $this->jasper = $jasper;

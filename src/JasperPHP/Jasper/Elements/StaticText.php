@@ -3,6 +3,8 @@
 namespace JasperPHP\Jasper\Elements;
 
 use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
+use JasperPHP\JFPDF;
+use JasperPHP\Utils\Color;
 
 /**
  * Class StaticText
@@ -11,27 +13,35 @@ use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
 class StaticText implements ElementInterface
 {
     /**
-     * @var
+     * @var JFPDF
      */
     private $pdf;
+
     /**
      * @var
      */
     private $elements;
 
-    private $font = 'Arial';
+    /**
+     * @var mixed
+     */
+    private $config;
 
     /**
      * StaticText constructor.
-     * @param $pdf
+     * @param JFPDF $pdf
      * @param $elements
      */
-    public function __construct($pdf, $elements)
+    public function __construct(JFPDF $pdf, $elements)
     {
         $this->pdf = $pdf;
         $this->elements = $elements;
+        $this->config = $this->pdf->config();
     }
 
+    /**
+     * @param $element
+     */
     public function position($element)
     {
         if ($element != '') {
@@ -41,14 +51,11 @@ class StaticText implements ElementInterface
         }
     }
 
-    private function HexToRGB($hex)
-    {
-
-        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
-        echo "$hex -> $r $g $b";
-    }
-
-    private function bold()
+    /**
+     * @param $element
+     * @return string
+     */
+    private function bold($element)
     {
         $bold = '';
         if (isset($element['textElement']['font']['@attributes']['isBold']) &&
@@ -64,30 +71,61 @@ class StaticText implements ElementInterface
         return $bold;
     }
 
+    /**
+     * @param $element
+     * @return JFPDF
+     */
+    private function font($element)
+    {
+        if (isset($element['textElement']['font']['@attributes']['fontName'])){
+            return $element['textElement']['font']['@attributes']['fontName'];
+        }
+        return $this->config['font'];
+    }
+
+    /**
+     * @param $element
+     * @return string
+     */
+    private function size($element)
+    {
+        if (isset($element['textElement']['font']['@attributes']['fontName'])){
+            return $element['textElement']['font']['@attributes']['size'];
+        }
+        return $this->config['sizeFont'];
+    }
+
+    private function textColor($element)
+    {
+        if (isset($element['reportElement']['@attributes']['forecolor'])) {
+            $rgb = Color::HexToRGB($element['reportElement']['@attributes']['forecolor']);
+            $this->pdf->SetTextColor($rgb[0], $rgb[1], $rgb[2]);
+        }
+    }
+
+    /**
+     * @param $element
+     */
     private function text($element)
     {
-        if (isset($element['textElement'])){
-
-            if (isset($element['textElement']['font']['@attributes']['fontName'])){
-                $this->font = $element['textElement']['font']['@attributes']['fontName'];
-            }
-
-
-        }
         $text = $element['text'];
         $width = $element['reportElement']['@attributes']['width'];
         $height = $element['reportElement']['@attributes']['height'];
 
-        $this->pdf->SetFont($this->font, $this->bold(), 10);
+        $this->textColor($element);
+        $this->pdf->SetFont($this->font($element), $this->bold($element), $this->size($element));
         $this->pdf->Cell($width, $height, $text);
     }
 
+    /**
+     * execute code
+     */
     public function run()
     {
+        //die(print_r($this->elements));
         foreach ($this->elements as $element) {
             $this->position($element);
             $this->text($element);
         }
-        //die();
     }
 }
