@@ -3,7 +3,7 @@
 namespace JasperPHP\Jasper\Elements;
 
 use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
-use JasperPHP\JFPDF;
+use JasperPHP\PDF;
 use JasperPHP\Utils\Color;
 
 /**
@@ -13,7 +13,7 @@ use JasperPHP\Utils\Color;
 class StaticText implements ElementInterface
 {
     /**
-     * @var JFPDF
+     * @var PDF
      */
     private $pdf;
 
@@ -29,10 +29,10 @@ class StaticText implements ElementInterface
 
     /**
      * StaticText constructor.
-     * @param JFPDF $pdf
+     * @param PDF $pdf
      * @param $elements
      */
-    public function __construct(JFPDF $pdf, $elements)
+    public function __construct(PDF $pdf, $elements)
     {
         $this->pdf = $pdf;
         $this->elements = $elements;
@@ -60,13 +60,16 @@ class StaticText implements ElementInterface
         $bold = '';
         if (isset($element['textElement']['font']['@attributes']['isBold']) &&
             $element['textElement']['font']['@attributes']['isBold'] == 'true'){
-            $bold = 'B';
-        } elseif (isset($element['textElement']['font']['@attributes']['isItalic']) &&
+            $bold .= 'B';
+        }
+        if (isset($element['textElement']['font']['@attributes']['isItalic']) &&
             $element['textElement']['font']['@attributes']['isItalic'] == 'true'){
-            $bold = 'I';
-        } elseif (isset($element['textElement']['font']['@attributes']['isUnderline']) &&
+            $bold .= 'I';
+        }
+
+        if (isset($element['textElement']['font']['@attributes']['isUnderline']) &&
             $element['textElement']['font']['@attributes']['isUnderline'] == 'true'){
-            $bold = 'U';
+            $bold .= 'U';
         }
         return $bold;
     }
@@ -103,6 +106,31 @@ class StaticText implements ElementInterface
         }
     }
 
+    private function backgroundColor($element)
+    {
+        if (isset($element['reportElement']['@attributes']['mode']) &&
+            $element['reportElement']['@attributes']['mode'] == 'Opaque'){
+            $rgb = Color::HexToRGB($element['reportElement']['@attributes']['backcolor']);
+            $this->pdf->SetFillColor($rgb[0], $rgb[1], $rgb[2]);
+            return true;
+        }
+        return false;
+    }
+
+    private function align($element)
+    {
+        if (isset($element['textElement']['@attributes']['textAlignment'])){
+            $align = $element['textElement']['@attributes']['textAlignment'];
+            if ($align == 'Center'){
+                return 'L';
+            } elseif ($align == 'Right'){
+                return 'R';
+            }
+        }
+
+        return $this->config['alignText'];
+    }
+
     /**
      * @param $element
      */
@@ -114,7 +142,13 @@ class StaticText implements ElementInterface
 
         $this->textColor($element);
         $this->pdf->SetFont($this->font($element), $this->bold($element), $this->size($element));
-        $this->pdf->Cell($width, $height, $text);
+
+
+        $this->pdf->SetDrawColor(0,0,0);
+        $this->pdf->SetLineWidth(5);
+
+
+        $this->pdf->Cell($width, $height, $text, 1, 2, $this->align($element), $this->backgroundColor($element));
     }
 
     /**

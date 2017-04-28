@@ -15,10 +15,12 @@ class JasperPHP
      * @var \FPDF
      */
     private $pdf;
+
     /**
      * @var
      */
     private $jasper;
+
     /**
      * @var
      */
@@ -29,7 +31,7 @@ class JasperPHP
      */
     public function __construct()
     {
-        $this->pdf = new JFPDF('P', 'pt');
+        $this->pdf = new PDF('P', 'pt');
     }
 
     /**
@@ -39,7 +41,7 @@ class JasperPHP
     {
         $left = $this->jasper['@attributes']['leftMargin'];
         $top = $this->jasper['@attributes']['topMargin'];
-        $this->pdf->SetMargins($left, $top);
+        $this->pdf->SetMargins($left, $top, $top);
     }
 
     /**

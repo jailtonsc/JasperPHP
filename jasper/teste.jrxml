@@ -9,16 +9,18 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="439" y="0" width="100" height="66" uuid="9030b4c1-736f-440e-85f0-57a7823d65e1"/>
-				<textElement>
-					<font fontName="Arial" size="10"/>
+				<reportElement mode="Opaque" x="439" y="0" width="100" height="66" backcolor="#33CCFF" uuid="9030b4c1-736f-440e-85f0-57a7823d65e1"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="Arial" size="10" isBold="true" isItalic="true" isUnderline="true"/>
+					<paragraph lineSpacing="Double" firstLineIndent="10"/>
 				</textElement>
 				<text><![CDATA[dfgf]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="196" y="29" width="100" height="20" forecolor="#99FF99" uuid="ac8214ee-acd7-4cd6-be53-a03468e041a1"/>
 				<textElement>
-					<font isBold="true" isItalic="true" isUnderline="true"/>
+					<font isBold="false" isItalic="false" isUnderline="true"/>
+					<paragraph lineSpacing="1_1_2"/>
 				</textElement>
 				<text><![CDATA[dfgdfgdf]]></text>
 			</staticText>

@@ -2,5 +2,6 @@
 
 return [
     'font' => 'Arial',
-    'sizeFont' => 10
+    'sizeFont' => 10,
+    'alignText' => 'L'
 ];
