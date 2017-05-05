@@ -27,11 +27,6 @@ class StaticText implements ElementInterface
      */
     private $config;
 
-    /**
-     * StaticText constructor.
-     * @param PDF $pdf
-     * @param $elements
-     */
     public function __construct(PDF $pdf, $elements)
     {
         $this->pdf = $pdf;
@@ -44,9 +39,9 @@ class StaticText implements ElementInterface
      */
     public function position($element)
     {
-        if ($element != '') {
-            $x = $element['reportElement']['@attributes']['x'];
-            $y = $element['reportElement']['@attributes']['y'];
+        if (isset($element['reportElement'])) {
+            $x = ($this->pdf->marginLeft + $element['reportElement']['@attributes']['x']);
+            $y = ($this->pdf->marginTop + $element['reportElement']['@attributes']['y']);
             $this->pdf->SetXY($x, $y);
         }
     }
@@ -74,10 +69,6 @@ class StaticText implements ElementInterface
         return $bold;
     }
 
-    /**
-     * @param $element
-     * @return JFPDF
-     */
     private function font($element)
     {
         if (isset($element['textElement']['font']['@attributes']['fontName'])){
@@ -103,6 +94,8 @@ class StaticText implements ElementInterface
         if (isset($element['reportElement']['@attributes']['forecolor'])) {
             $rgb = Color::HexToRGB($element['reportElement']['@attributes']['forecolor']);
             $this->pdf->SetTextColor($rgb[0], $rgb[1], $rgb[2]);
+        } else {
+            $this->pdf->SetTextColor(0, 0, 0);
         }
     }
 
@@ -131,24 +124,39 @@ class StaticText implements ElementInterface
         return $this->config['alignText'];
     }
 
+    private function border($element)
+    {
+        if (isset($element['box']['pen']['@attributes']['lineWidth'])){
+            $rgb = Color::HexToRGB($element['box']['pen']['@attributes']['lineColor']);
+
+            $this->pdf->SetDrawColor($rgb[0], $rgb[1], $rgb[2]);
+            $this->pdf->SetLineWidth($element['box']['pen']['@attributes']['lineWidth']);
+            return 1;
+        }
+        return 0;
+    }
+
     /**
      * @param $element
      */
     private function text($element)
     {
-        $text = $element['text'];
-        $width = $element['reportElement']['@attributes']['width'];
-        $height = $element['reportElement']['@attributes']['height'];
+        $width = 0;
+        $height = 0;
+        $text = '';
+
+        if (isset($element['text'])){
+            $text = $element['text'];
+        }
+
+        if (isset($element['reportElement'])){
+            $width = $element['reportElement']['@attributes']['width'];
+            $height = $element['reportElement']['@attributes']['height'];
+        }
 
         $this->textColor($element);
         $this->pdf->SetFont($this->font($element), $this->bold($element), $this->size($element));
-
-
-        $this->pdf->SetDrawColor(0,0,0);
-        $this->pdf->SetLineWidth(5);
-
-
-        $this->pdf->Cell($width, $height, $text, 1, 2, $this->align($element), $this->backgroundColor($element));
+        $this->pdf->Cell($width, $height, $text, $this->border($element), 0, $this->align($element), $this->backgroundColor($element));
     }
 
     /**
@@ -156,7 +164,7 @@ class StaticText implements ElementInterface
      */
     public function run()
     {
-        //die(print_r($this->elements));
+        //print_r($this->elements);
         foreach ($this->elements as $element) {
             $this->position($element);
             $this->text($element);

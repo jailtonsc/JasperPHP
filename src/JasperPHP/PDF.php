@@ -9,6 +9,22 @@ namespace JasperPHP;
 class PDF extends \FPDF
 {
     /**
+     * @var
+     */
+    public $marginLeft;
+
+    /**
+     * @var
+     */
+    public $marginTop;
+
+    /**
+     * Height of the previous band
+     * @var
+     */
+    public $heightBandPrevious;
+
+    /**
      * get config params
      *
      * @return mixed
@@ -17,7 +33,7 @@ class PDF extends \FPDF
     {
         return include_once dirname(__FILE__) . '/../config/config.php';
     }
-
+/*
     public function drawTextBox($strText, $w, $h, $align = 'L', $valign = 'T', $border = true, $fill = false)
     {
         $xi = $this->GetX();
@@ -150,5 +166,5 @@ class PDF extends \FPDF
         }
         $this->x = $this->lMargin;
         return $nl;
-    }
+    }*/
 }

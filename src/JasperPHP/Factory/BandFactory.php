@@ -2,7 +2,8 @@
 
 namespace JasperPHP\Factory;
 
-use JasperPHP\Jasper\Elements\StaticText;
+use JasperPHP\Jasper\Bands\PageHeader;
+use JasperPHP\Jasper\Bands\Title;
 use JasperPHP\PDF;
 
 
@@ -12,61 +13,27 @@ use JasperPHP\PDF;
  */
 class BandFactory
 {
-    /**
-     * @var
-     */
-    private $pdf;
 
     /**
-     * @var
-     */
-    private $jasper;
-
-    /**
-     * @var array
-     */
-    private $band = [
-        'title'
-    ];
-
-    /**
-     * BandFactoryMethod constructor.
+     * return class band
+     *
      * @param PDF $pdf
-     * @param $jasper
-     */
-    public function __construct(PDF $pdf, $jasper)
-    {
-        $this->pdf = $pdf;
-        $this->jasper = $jasper;
-    }
-
-    /**
+     * @param $bandName
      * @param $band
+     * @return object
      */
-    private function generateHeight($band)
+    public function makeBand(PDF $pdf, $bandName, $band)
     {
-        $height = $band['@attributes']['height'];
-        $this->pdf->SetX($height);
-    }
+        $object = null;
 
-    /**
-     * method
-     */
-    public function makeBand()
-    {
-        foreach ($this->jasper as $key => $band) {
-            if (in_array($key, $this->band)){
-                $b = $band['band'];
-                $this->generateHeight($b);
-                foreach ($b as $k => $element) {
-                    switch ($k) {
-                        case 'staticText':
-                            //die(print_r($b));
-                           (new StaticText($this->pdf, $element))->run();
-                            break;
-                    }
-                }
-            }
+        switch ($bandName) {
+            case 'title':
+                $object = new Title($pdf, $band);
+                break;
+            case 'pageHeader':
+                $object = new PageHeader($pdf, $band);
+                break;
         }
+        return $object;
     }
 }

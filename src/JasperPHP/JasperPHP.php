@@ -12,16 +12,21 @@ use JasperPHP\Utils\XmlToArray;
 class JasperPHP
 {
     /**
+     * Fpdf instance
+     *
      * @var \FPDF
      */
     private $pdf;
 
     /**
+     * array jasper
      * @var
      */
     private $jasper;
 
     /**
+     * Path of the jasper
+     *
      * @var
      */
     public $jasperPath;
@@ -35,17 +40,21 @@ class JasperPHP
     }
 
     /**
-     * method
+     * config the margin
      */
     private function margin()
     {
+        $this->pdf->SetAutoPageBreak(false);
         $left = $this->jasper['@attributes']['leftMargin'];
         $top = $this->jasper['@attributes']['topMargin'];
         $this->pdf->SetMargins($left, $top, $top);
+
+        $this->pdf->marginLeft = $left;
+        $this->pdf->marginTop = $top;
     }
 
     /**
-     * method
+     * Config the margin
      */
     private function page(){
         $pageWidth = $this->jasper['@attributes']['pageWidth'];
@@ -62,7 +71,7 @@ class JasperPHP
     }
 
     /**
-     * method
+     * Generate pdf
      */
     public function generatePdf()
     {

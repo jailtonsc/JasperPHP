@@ -2,14 +2,11 @@
 
 namespace JasperPHP\Jasper;
 
-use JasperPHP\Factory\BandFactory;
+
+use JasperPHP\Factory\ElementFactory;
 use JasperPHP\PDF;
 
-/**
- * Class Band
- * @package JasperPHP\Jasper
- */
-class Band
+class Element
 {
     /**
      * @var PDF
@@ -18,17 +15,17 @@ class Band
     /**
      * @var
      */
-    private $jasper;
+    private $band;
 
     /**
      * Band constructor.
      * @param $pdf
-     * @param $jasper
+     * @param $band
      */
-    public function __construct(PDF $pdf, $jasper)
+    public function __construct(PDF $pdf, $band)
     {
         $this->pdf = $pdf;
-        $this->jasper = $jasper;
+        $this->band = $band;
     }
 
     /**
@@ -36,9 +33,9 @@ class Band
      */
     public function run()
     {
-        foreach ($this->jasper as $bandName => $bandObject) {
-            $band = new BandFactory();
-            $object = $band->makeBand($this->pdf, $bandName, $bandObject);
+        foreach ($this->band['band'] as $elementName => $elementObject) {
+            $element = new ElementFactory();
+            $object = $element->makeBand($this->pdf, $elementName, $elementObject);
 
             if (!empty($object)){
                 $object->run();

@@ -4,11 +4,13 @@ namespace JasperPHP\Utils;
 
 /**
  * Class XmlToArray
- * @package JasperPHP
+ * @package JasperPHP\Utils
  */
 class XmlToArray
 {
     /**
+     * Convert XML to Array
+     *
      * @param $dataXml
      * @return mixed
      */
