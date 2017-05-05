@@ -5,10 +5,10 @@ namespace JasperPHP\Jasper\Bands;
 use JasperPHP\PDF;
 
 /**
- * Class PageHeader
+ * Class PageFooter
  * @package JasperPHP\Jasper\Bands
  */
-class PageHeader extends BandObstract
+class PageFooter extends BandObstract
 {
     /**
      * Title constructor.

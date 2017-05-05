@@ -44,7 +44,6 @@ class JasperPHP
      */
     private function margin()
     {
-        $this->pdf->SetAutoPageBreak(false);
         $left = $this->jasper['@attributes']['leftMargin'];
         $top = $this->jasper['@attributes']['topMargin'];
         $this->pdf->SetMargins($left, $top, $top);

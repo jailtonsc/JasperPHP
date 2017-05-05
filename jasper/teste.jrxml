@@ -15,11 +15,11 @@
 			<staticText>
 				<reportElement mode="Opaque" x="411" y="0" width="100" height="66" backcolor="#33CCFF" uuid="9030b4c1-736f-440e-85f0-57a7823d65e1"/>
 				<box topPadding="0" leftPadding="0">
-					<pen lineWidth="2.75" lineStyle="Solid" lineColor="#FF3333"/>
-					<topPen lineWidth="2.75" lineStyle="Solid" lineColor="#FF3333"/>
-					<leftPen lineWidth="2.75" lineStyle="Solid" lineColor="#FF3333"/>
-					<bottomPen lineWidth="2.75" lineStyle="Solid" lineColor="#FF3333"/>
-					<rightPen lineWidth="2.75" lineStyle="Solid" lineColor="#FF3333"/>
+					<pen lineWidth="2.75" lineStyle="Dashed" lineColor="#FF3333"/>
+					<topPen lineWidth="2.75" lineStyle="Dashed" lineColor="#FF3333"/>
+					<leftPen lineWidth="2.75" lineStyle="Dashed" lineColor="#FF3333"/>
+					<bottomPen lineWidth="2.75" lineStyle="Dashed" lineColor="#FF3333"/>
+					<rightPen lineWidth="2.75" lineStyle="Dashed" lineColor="#FF3333"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
 					<font fontName="Arial" size="10" isBold="true" isItalic="true" isUnderline="true"/>
@@ -61,17 +61,32 @@
 		<band height="125" splitType="Stretch">
 			<staticText>
 				<reportElement x="196" y="49" width="100" height="20" uuid="da026e36-b95e-4a06-9740-07c62ab3cd1a"/>
-				<text><![CDATA[jkljk]]></text>
+				<text><![CDATA[santos]]></text>
 			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="287" y="9" width="100" height="20" uuid="eb7fafe1-8f55-4964-befb-4972d61e292a"/>
+				<text><![CDATA[yiuyuiyu]]></text>
+			</staticText>
+		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="176" y="16" width="100" height="20" uuid="87029d63-078b-4e0a-b5a5-1394674f7452"/>
+				<text><![CDATA[erwerwe]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="412" y="22" width="100" height="20" uuid="01cf180d-8fc8-4f95-9e44-01ad3df20f44"/>
+				<text><![CDATA[fghfg]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>
