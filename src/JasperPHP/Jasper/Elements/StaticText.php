@@ -41,7 +41,7 @@ class StaticText implements ElementInterface
     {
         if (isset($element['reportElement'])) {
             $x = ($this->pdf->marginLeft + $element['reportElement']['@attributes']['x']);
-            $y = ($this->pdf->marginTop + $element['reportElement']['@attributes']['y']);
+            $y = ($this->pdf->position + $element['reportElement']['@attributes']['y']);
             $this->pdf->SetXY($x, $y);
         }
     }
@@ -164,10 +164,15 @@ class StaticText implements ElementInterface
      */
     public function run()
     {
-        //print_r($this->elements);
         foreach ($this->elements as $element) {
-            $this->position($element);
-            $this->text($element);
+            if (is_array($element)){
+                $this->position($element);
+                $this->text($element);
+            } else {
+                $this->position($this->elements);
+                $this->text($this->elements);
+                break;
+            }
         }
     }
 }

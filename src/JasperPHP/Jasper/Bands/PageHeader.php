@@ -24,9 +24,27 @@ class PageHeader extends BandObstract
     /**
      * Adjusts the position of element
      */
-    private function adjustPosition()
+    protected function adjustPosition()
     {
-        $this->pdf->marginTop += $this->pdf->heightBandPrevious;
+        $page = $this->pdf->PageNo();
+
+        if ($page == 1 && isset($this->pdf->title['band']['@attributes']['height'])){
+            $this->pdf->position += ($this->pdf->heightBandPrevious  + $this->pdf->title['band']['@attributes']['height']);
+        } else {
+            $this->pdf->position = $this->pdf->marginTop;
+        }
+    }
+
+    /**
+     * Report height band
+     */
+    protected function reportHeightBand()
+    {
+        if (!empty($this->pdf->pageHeader)){
+            $this->pdf->heightBandPrevious = $this->pdf->pageHeader['band']['@attributes']['height'];
+        } else {
+            $this->pdf->heightBandPrevious = null;
+        }
     }
 
     /**
@@ -36,5 +54,6 @@ class PageHeader extends BandObstract
     {
         $this->adjustPosition();
         $this->runElement();
+        $this->reportHeightBand();
     }
 }

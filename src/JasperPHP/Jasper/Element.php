@@ -2,10 +2,13 @@
 
 namespace JasperPHP\Jasper;
 
-
 use JasperPHP\Factory\ElementFactory;
 use JasperPHP\PDF;
 
+/**
+ * Class Element
+ * @package JasperPHP\Jasper
+ */
 class Element
 {
     /**
@@ -18,7 +21,7 @@ class Element
     private $band;
 
     /**
-     * Band constructor.
+     * Element constructor.
      * @param $pdf
      * @param $band
      */
@@ -35,7 +38,7 @@ class Element
     {
         foreach ($this->band['band'] as $elementName => $elementObject) {
             $element = new ElementFactory();
-            $object = $element->makeBand($this->pdf, $elementName, $elementObject);
+            $object = $element->makeElement($this->pdf, $elementName, $elementObject);
 
             if (!empty($object)){
                 $object->run();

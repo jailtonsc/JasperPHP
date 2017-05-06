@@ -2,6 +2,8 @@
 
 namespace JasperPHP;
 
+use JasperPHP\Jasper\Bands\PageHeader;
+
 /**
  * Class PDF
  * @package JasperPHP
@@ -19,10 +21,25 @@ class PDF extends \FPDF
     public $marginTop;
 
     /**
+     * @var
+     */
+    public $position;
+
+    /**
      * Height of the previous band
      * @var
      */
     public $heightBandPrevious;
+
+    /**
+     * @var
+     */
+    public $pageHeader;
+
+    /**
+     * @var
+     */
+    public $title;
 
     /**
      * get config params
@@ -33,6 +50,20 @@ class PDF extends \FPDF
     {
         return include_once dirname(__FILE__) . '/../config/config.php';
     }
+
+    public function header()
+    {
+        if (isset($this->pageHeader)) {
+            $band = new PageHeader($this, $this->pageHeader);
+            $band->run();
+        }
+    }
+
+    public function footer()
+    {
+    }
+
+
 /*
     public function drawTextBox($strText, $w, $h, $align = 'L', $valign = 'T', $border = true, $fill = false)
     {

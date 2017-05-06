@@ -30,18 +30,10 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="177" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<staticText>
-				<reportElement x="24" y="0" width="100" height="20" uuid="5bf41c05-6655-4c69-80a1-68431ecebda4"/>
-				<text><![CDATA[jailton]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="174" y="58" width="100" height="20" forecolor="#99FF99" uuid="ac8214ee-acd7-4cd6-be53-a03468e041a1"/>
-				<textElement>
-					<font isBold="false" isItalic="false" isUnderline="true" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[dfgdfgdf]]></text>
+				<reportElement x="52" y="13" width="100" height="20" uuid="e464c836-2d77-4aef-ae56-c2dd43751dd9"/>
+				<text><![CDATA[Page Header]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

@@ -35,9 +35,6 @@ class BandFactory
             case 'title':
                 $object = new Title($pdf, $band);
                 break;
-            case 'pageHeader':
-                $object = new PageHeader($pdf, $band);
-                break;
             case 'columnHeader':
                 $object = new ColumnHeader($pdf, $band);
                 break;

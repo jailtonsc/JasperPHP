@@ -2,7 +2,6 @@
 
 namespace JasperPHP\Jasper\Bands;
 
-use JasperPHP\Factory\ElementFactory;
 use JasperPHP\Jasper\Element;
 use JasperPHP\PDF;
 
@@ -28,7 +27,22 @@ abstract class BandObstract
     {
         $element = new Element($this->pdf, $this->band);
         $element->run();
-        $this->reportHeightBand();
+    }
+
+    /**
+     * Adjusts the position of element
+     */
+    protected function adjustPosition()
+    {
+        $page = $this->pdf->PageNo();
+
+        //Sum with the size of the title band
+        if ($page == 1 && isset($this->pdf->title['band']['@attributes']['height'])){
+            $this->pdf->position += ($this->pdf->heightBandPrevious + $this->pdf->title['band']['@attributes']['height']);
+        } else {
+            $this->pdf->position += $this->pdf->heightBandPrevious;
+        }
+
     }
 
     /**

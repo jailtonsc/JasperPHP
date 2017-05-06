@@ -22,10 +22,20 @@ class Title extends BandObstract
     }
 
     /**
+     * Adjusts the position of element
+     */
+    protected function adjustPosition()
+    {
+        $this->pdf->position = $this->pdf->marginTop;
+    }
+
+    /**
      * execute method element
      */
     public function run()
     {
+        $this->adjustPosition();
         $this->runElement();
+        $this->reportHeightBand();
     }
 }

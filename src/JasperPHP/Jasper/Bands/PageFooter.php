@@ -22,19 +22,12 @@ class PageFooter extends BandObstract
     }
 
     /**
-     * Adjusts the position of element
-     */
-    private function adjustPosition()
-    {
-        $this->pdf->marginTop += $this->pdf->heightBandPrevious;
-    }
-
-    /**
      * execute method element
      */
     public function run()
     {
         $this->adjustPosition();
         $this->runElement();
+        $this->reportHeightBand();
     }
 }

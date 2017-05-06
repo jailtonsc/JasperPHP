@@ -69,6 +69,14 @@ class JasperPHP
 
     }
 
+    private function pageHeader()
+    {
+        if (isset($this->jasper['pageHeader'])){
+            $this->pdf->pageHeader = $this->jasper['pageHeader'];
+            $this->pdf->title = $this->jasper['title'];
+        }
+    }
+
     /**
      * Generate pdf
      */
@@ -76,12 +84,14 @@ class JasperPHP
     {
         $this->jasper = XmlToArray::xmlToArray($this->jasperPath);
 
+        $this->pageHeader();
+
         $this->page();
         $this->margin();
 
         $band = new Band($this->pdf, $this->jasper);
         $band->run();
-
+        //die();
         $this->pdf->Output();
     }
 }
