@@ -3,6 +3,7 @@
 namespace JasperPHP\Factory;
 
 use JasperPHP\Jasper\Elements\StaticText;
+use JasperPHP\Jasper\Elements\Rectangle;
 use JasperPHP\PDF;
 
 /**
@@ -25,6 +26,10 @@ class ElementFactory
         switch ($elementName) {
             case 'staticText':
                 $element =  new StaticText($pdf, $elementObject);
+                break;
+
+            case 'rectangle':
+                $element =  new Rectangle($pdf, $elementObject);
                 break;
         }
         return $element;

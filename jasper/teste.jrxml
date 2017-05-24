@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-05-23T00:54:45 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="teste" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1f61304-99af-4cae-bb9a-68e7654e17f2">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -30,10 +32,26 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="50" splitType="Stretch">
+		<band height="73" splitType="Stretch">
 			<staticText>
 				<reportElement x="52" y="13" width="100" height="20" uuid="e464c836-2d77-4aef-ae56-c2dd43751dd9"/>
 				<text><![CDATA[Page Header]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="240" y="23" width="272" height="27" uuid="0b2d8bea-6033-4ef4-8c28-217c94235a25"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="245" y="25" width="120" height="30" uuid="0b2d8bea-6033-4ef4-8c28-217c94235a29"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="310" y="27" width="100" height="18" uuid="bf3f98f6-7449-4807-bc1e-b29474049535"/>
+				<text><![CDATA[dentro do retangulo]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
