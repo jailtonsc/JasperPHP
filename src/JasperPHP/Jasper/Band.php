@@ -36,8 +36,8 @@ class Band
      */
     public function run()
     {
+        $band = new BandFactory();
         foreach ($this->jasper as $bandName => $bandObject) {
-            $band = new BandFactory();
             $object = $band->makeBand($this->pdf, $bandName, $bandObject);
 
             if (!empty($object)){

@@ -36,8 +36,8 @@ class Element
      */
     public function run()
     {
+        $element = new ElementFactory();
         foreach ($this->band['band'] as $elementName => $elementObject) {
-            $element = new ElementFactory();
             $object = $element->makeElement($this->pdf, $elementName, $elementObject);
 
             if (!empty($object)){

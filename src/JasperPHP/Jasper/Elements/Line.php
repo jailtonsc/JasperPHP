@@ -101,6 +101,5 @@ class Line implements ElementInterface
                 break;
             }
         }
-       // die();
     }
 }

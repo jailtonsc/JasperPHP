@@ -1,7 +1,7 @@
 {
     "name": "jailtonsc/jasper-php",
     "description": "",
-    "keywords": ["jasper", "pdf", "report", "laravel"],
+    "keywords": ["jasper", "pdf", "report", "laravel", "php"],
     "license": "MIT",
     "require": {
         "php": ">=5.5.9",

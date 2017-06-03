@@ -59,7 +59,7 @@ class JasperPHP
         $pageWidth = $this->jasper['@attributes']['pageWidth'];
         $pageHeight = $this->jasper['@attributes']['pageHeight'];
 
-        $size = [$pageHeight, $pageWidth];
+        $size = array($pageHeight, $pageWidth);
 
         if (isset($this->jasper['@attributes']['orientation']) && $this->jasper['@attributes']['orientation'] == 'Landscape'){
             $this->pdf->addPage('L', $size);
@@ -91,7 +91,6 @@ class JasperPHP
 
         $band = new Band($this->pdf, $this->jasper);
         $band->run();
-        //die();
         $this->pdf->Output();
     }
 }
