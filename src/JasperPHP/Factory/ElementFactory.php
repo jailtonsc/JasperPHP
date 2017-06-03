@@ -2,6 +2,7 @@
 
 namespace JasperPHP\Factory;
 
+use JasperPHP\Jasper\Elements\Line;
 use JasperPHP\Jasper\Elements\StaticText;
 use JasperPHP\Jasper\Elements\Rectangle;
 use JasperPHP\PDF;
@@ -27,9 +28,11 @@ class ElementFactory
             case 'staticText':
                 $element =  new StaticText($pdf, $elementObject);
                 break;
-
             case 'rectangle':
                 $element =  new Rectangle($pdf, $elementObject);
+                break;
+            case 'line':
+                $element =  new Line($pdf, $elementObject);
                 break;
         }
         return $element;

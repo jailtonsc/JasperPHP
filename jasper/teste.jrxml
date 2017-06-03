@@ -7,7 +7,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="139" splitType="Stretch">
 			<staticText>
 				<reportElement x="285" y="24" width="100" height="20" uuid="7023f11c-4ebc-491f-a5e2-d618e6986b48"/>
 				<text><![CDATA[ouioiu]]></text>
@@ -27,12 +27,15 @@
 				</textElement>
 				<text><![CDATA[dfgf]]></text>
 			</staticText>
+			<line>
+				<reportElement x="164" y="89" width="100" height="1" uuid="5986eda8-f19e-48a2-9a21-8d023d38f08a"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="73" splitType="Stretch">
 			<staticText>
-				<reportElement x="52" y="13" width="100" height="20" uuid="e464c836-2d77-4aef-ae56-c2dd43751dd9"/>
+				<reportElement x="56" y="0" width="100" height="20" uuid="e464c836-2d77-4aef-ae56-c2dd43751dd9"/>
 				<text><![CDATA[Page Header]]></text>
 			</staticText>
 			<rectangle>
