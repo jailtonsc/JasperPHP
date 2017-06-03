@@ -108,7 +108,6 @@ class Rectangle implements ElementInterface
                 $this->rec($this->elements);
                 break;
             }
-            $this->rec($element);
         }
     }
 }
