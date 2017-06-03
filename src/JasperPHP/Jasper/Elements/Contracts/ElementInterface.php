@@ -8,8 +8,6 @@ namespace JasperPHP\Jasper\Elements\Contracts;
  */
 interface ElementInterface
 {
-    public function position($element);
-
     /**
      * @return mixed
      */

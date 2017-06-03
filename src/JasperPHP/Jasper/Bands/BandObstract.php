@@ -40,7 +40,7 @@ abstract class BandObstract
         if ($page == 1 && isset($this->pdf->title['band']['@attributes']['height'])){
             $this->pdf->position += ($this->pdf->heightBandPrevious + $this->pdf->title['band']['@attributes']['height']);
         } else {
-            $this->pdf->position += $this->pdf->heightBandPrevious;
+            $this->pdf->position += ($this->pdf->heightBandPrevious + $this->pdf->pageHeader['band']['@attributes']['height']);
         }
 
     }

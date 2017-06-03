@@ -27,6 +27,11 @@ class StaticText implements ElementInterface
      */
     private $config;
 
+    /**
+     * StaticText constructor.
+     * @param PDF $pdf
+     * @param $elements
+     */
     public function __construct(PDF $pdf, $elements)
     {
         $this->pdf = $pdf;
@@ -35,6 +40,8 @@ class StaticText implements ElementInterface
     }
 
     /**
+     * Position of the element
+     *
      * @param $element
      */
     public function position($element)
@@ -47,6 +54,8 @@ class StaticText implements ElementInterface
     }
 
     /**
+     * Informs the type of border of the element
+     *
      * @param $element
      * @return string
      */
@@ -69,6 +78,13 @@ class StaticText implements ElementInterface
         return $bold;
     }
 
+    /**
+     * Informs the source type of the element, if it does not find the source
+     * in the jasper picks up the default
+     *
+     * @param $element
+     * @return mixed
+     */
     private function font($element)
     {
         if (isset($element['textElement']['font']['@attributes']['fontName'])){
@@ -89,6 +105,9 @@ class StaticText implements ElementInterface
         return $this->config['sizeFont'];
     }
 
+    /**
+     * @param $element
+     */
     private function textColor($element)
     {
         if (isset($element['reportElement']['@attributes']['forecolor'])) {
@@ -99,6 +118,10 @@ class StaticText implements ElementInterface
         }
     }
 
+    /**
+     * @param $element
+     * @return bool
+     */
     private function backgroundColor($element)
     {
         if (isset($element['reportElement']['@attributes']['mode']) &&
@@ -110,6 +133,10 @@ class StaticText implements ElementInterface
         return false;
     }
 
+    /**
+     * @param $element
+     * @return string
+     */
     private function align($element)
     {
         if (isset($element['textElement']['@attributes']['textAlignment'])){
@@ -124,6 +151,10 @@ class StaticText implements ElementInterface
         return $this->config['alignText'];
     }
 
+    /**
+     * @param $element
+     * @return int
+     */
     private function border($element)
     {
         if (isset($element['box']['pen']['@attributes']['lineWidth'])){
