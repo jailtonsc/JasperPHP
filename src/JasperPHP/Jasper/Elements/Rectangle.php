@@ -19,11 +19,6 @@ class Rectangle implements ElementInterface
     private $elements;
 
     /**
-     * @var mixed
-     */
-    private $config;
-
-    /**
      * Rectangle constructor.
      * @param PDF $pdf
      * @param $elements
@@ -32,7 +27,6 @@ class Rectangle implements ElementInterface
     {
         $this->pdf = $pdf;
         $this->elements = $elements;
-        $this->config = $this->pdf->config();
     }
 
     /**

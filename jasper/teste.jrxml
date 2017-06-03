@@ -28,7 +28,16 @@
 				<text><![CDATA[dfgf]]></text>
 			</staticText>
 			<line>
-				<reportElement x="164" y="89" width="100" height="1" uuid="5986eda8-f19e-48a2-9a21-8d023d38f08a"/>
+				<reportElement x="219" y="99" width="100" height="1" uuid="88448608-6efe-4630-940f-5363d70ec915"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="22" y="100" width="100" height="1" uuid="64d1408d-0d8a-4205-9c7f-d3e0b4485b72"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
 			</line>
 		</band>
 	</title>
