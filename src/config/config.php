@@ -3,5 +3,6 @@
 return [
     'font' => 'Arial',
     'sizeFont' => 10,
-    'alignText' => 'L'
+    'alignText' => 'L',
+    'dirTmpImage' => '/../../img/tmp/'
 ];
