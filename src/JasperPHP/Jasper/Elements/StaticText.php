@@ -27,6 +27,14 @@ class StaticText implements ElementInterface
      */
     private $config;
 
+    private $reportElement;
+
+    private $text;
+
+    private $textElement;
+
+    private $box;
+
     /**
      * StaticText constructor.
      * @param PDF $pdf

@@ -6,6 +6,10 @@ use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
 use JasperPHP\PDF;
 use JasperPHP\Utils\Color;
 
+/**
+ * Class Line
+ * @package JasperPHP\Jasper\Elements
+ */
 class Line implements ElementInterface
 {
 
@@ -18,6 +22,16 @@ class Line implements ElementInterface
      * @var
      */
     private $elements;
+
+    /**
+     * @var
+     */
+    private $reportElement;
+
+    /**
+     * @var
+     */
+    private $graphicElement;
 
     /**
      * Rectangle constructor.
@@ -33,15 +47,11 @@ class Line implements ElementInterface
     /**
      * Informs the line color
      *
-     * @param $element
      */
-    private function colorLine($element)
+    private function colorLine()
     {
-        if (isset($element['reportElement']['@attributes']['forecolor'])) {
-            $rgb = Color::HexToRGB($element['reportElement']['@attributes']['forecolor']);
-            $this->pdf->SetDrawColor($rgb[0], $rgb[1], $rgb[2]);
-        } else if (isset($element['@attributes']['forecolor'])) {
-            $rgb = Color::HexToRGB($element['@attributes']['forecolor']);
+        if (isset($this->reportElement['@attributes']['forecolor'])) {
+            $rgb = Color::HexToRGB($this->reportElement['@attributes']['forecolor']);
             $this->pdf->SetDrawColor($rgb[0], $rgb[1], $rgb[2]);
         } else {
             $this->pdf->SetDrawColor(0, 0, 0);
@@ -51,37 +61,27 @@ class Line implements ElementInterface
     /**
      * Adjust the border color
      *
-     * @param $element
      */
-    private function lineBorder($element)
+    private function lineBorder()
     {
-        if (isset($element['graphicElement'])){
-            $this->pdf->SetLineWidth($element['graphicElement']['pen']['@attributes']['lineWidth']);
-        } else if (isset($element['pen'])){
-            $this->pdf->SetLineWidth($element['pen']['@attributes']['lineWidth']);
+        if (isset($this->graphicElement['pen'])) {
+            $this->pdf->SetLineWidth($this->graphicElement['pen']['@attributes']['lineWidth']);
         } else {
             $this->pdf->SetLineWidth(1);
         }
     }
 
-    private function line($element)
+    /**
+     * create line
+     */
+    private function line()
     {
-        $width = 0;
-        $x = 0;
-        $y = 0;
+        $width = $this->reportElement['@attributes']['width'];
+        $x = $this->reportElement['@attributes']['x'];
+        $y = $this->reportElement['@attributes']['y'];
 
-        if (isset($element['reportElement'])) {
-            $width = $element['reportElement']['@attributes']['width'];
-            $x = $element['reportElement']['@attributes']['x'];
-            $y = $element['reportElement']['@attributes']['y'];
-        } else if (isset($element['@attributes'])) {
-            $width = $element['@attributes']['width'];
-            $x = $element['@attributes']['x'];
-            $y = $element['@attributes']['y'];
-        }
-
-        $this->lineBorder($element);
-        $this->colorLine($element);
+        $this->colorLine();
+        $this->lineBorder();
 
         $this->pdf->Line(
             ($this->pdf->marginLeft + $x) + $width,
@@ -91,15 +91,22 @@ class Line implements ElementInterface
         );
     }
 
+    /**
+     * execute code
+     */
     public function run()
     {
         foreach ($this->elements as $element) {
-            if (is_array($element)){
-                $this->line($element);
-            } else {
-                $this->line($this->elements);
-                break;
+            if (isset($element['reportElement'])) {
+                $this->reportElement = $element['reportElement'];
+                $this->graphicElement = $element['graphicElement'];
+            } else if (isset($element['@attributes'])) {
+                $this->reportElement['@attributes'] = $element['@attributes'];
+            } else if (isset($element['pen'])) {
+                $this->graphicElement['pen'] = $element['pen'];
             }
+
+            $this->line();
         }
     }
 }

@@ -28,7 +28,7 @@
 				<text><![CDATA[dfgf]]></text>
 			</staticText>
 			<line>
-				<reportElement x="219" y="99" width="100" height="1" uuid="88448608-6efe-4630-940f-5363d70ec915"/>
+				<reportElement x="240" y="120" width="100" height="1" uuid="88448608-6efe-4630-940f-5363d70ec915"/>
 				<graphicElement>
 					<pen lineWidth="3.0"/>
 				</graphicElement>
@@ -36,7 +36,7 @@
 			<line>
 				<reportElement x="22" y="100" width="100" height="1" uuid="64d1408d-0d8a-4205-9c7f-d3e0b4485b72"/>
 				<graphicElement>
-					<pen lineWidth="3.0"/>
+					<pen lineWidth="3.0" lineColor="#0000FF"/>
 				</graphicElement>
 			</line>
 		</band>
@@ -48,7 +48,7 @@
 				<text><![CDATA[Page Header]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="240" y="23" width="272" height="27" uuid="0b2d8bea-6033-4ef4-8c28-217c94235a25"/>
+				<reportElement x="239" y="20" width="272" height="27" uuid="0b2d8bea-6033-4ef4-8c28-217c94235a25"/>
 				<graphicElement>
 					<pen lineWidth="3.0" lineStyle="Solid"/>
 				</graphicElement>
@@ -59,10 +59,6 @@
 					<pen lineWidth="4.25" lineStyle="Solid"/>
 				</graphicElement>
 			</rectangle>
-			<staticText>
-				<reportElement x="310" y="27" width="100" height="18" uuid="bf3f98f6-7449-4807-bc1e-b29474049535"/>
-				<text><![CDATA[dentro do retangulo]]></text>
-			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
