@@ -4,5 +4,6 @@ return [
     'font' => 'Arial',
     'sizeFont' => 10,
     'alignText' => 'L',
-    'dirTmpImage' => '/../../img/tmp/'
+    'dirTmpImage' => dirname(__FILE__) . '/../tmp/img/',
+    'imageBorderRGB' => array(0, 0, 0)
 ];

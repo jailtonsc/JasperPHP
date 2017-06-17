@@ -8,45 +8,50 @@ namespace JasperPHP\Utils;
 class Image
 {
     /**
+     * generate border to image
+     *
      * @param $file
-     * @param $width
-     * @param $height
-     * @return mixed
+     * @param $fileTmp
+     * @param array $rgb
+     * @param $sizeBorder
+     * @return string
+     * @throws \Exception
      */
-    /*
-    public static function addBorder($file, $width, $height)
+    public static function addBorder($file, $fileTmp, $rgb = array(), $sizeBorder)
     {
-        $image = imagecreatefromjpeg($file);
-
-        $gd = imagecreatetruecolor($width, $height);
-
-        for($i = 0; $i<$height; $i++) {
-            // add left border
-            imagesetpixel($image,0,$i, imagecolorallocate($gd, 0,0,0) );
-            // add right border
-            imagesetpixel($image,$width-1,$i, imagecolorallocate($gd, 0,0,0) );
+        if (self::isType($file)){
+            throw new \Exception("Jasper contains images in an invalid format.");
         }
-        for($j = 0; $j<$width; $j++) {
-            // add bottom border
-            imagesetpixel($image,$j,0, imagecolorallocate($gd, 0,0,0) );
-            // add top border
-            imagesetpixel($image,$j,$height-1, imagecolorallocate($gd, 0,0,0) );
-        }
-
-        return $image;
-    }*/
-
-    public static function addBorder($file, $fileTmp)
-    {
-        die($fileTmp);
         $im = imagecreatefromjpeg($file);
         // Draw border
-        $border = imagecolorallocate($im, 180, 0, 255);
-        self::drawBorder($im, $border, 1);
+        $border = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
+        self::drawBorder($im, $border, $sizeBorder);
 
-        imagejpeg($im, $fileTmp . "/file.jpg");
+        $name = md5(uniqid()) . '-' . time() . '.jpg';
+
+        imagejpeg($im, $fileTmp . $name);
+        return $fileTmp . $name;
     }
 
+    /**
+     * @param $image
+     * @return bool
+     */
+    private static function isType($image)
+    {
+        return in_array(substr($image, strlen($image), -4), array(
+            '.png',
+            '.jpg',
+            'jpeg',
+            '.gif'
+        ));
+    }
+
+    /**
+     * @param $im
+     * @param $color
+     * @param int $thickness
+     */
     private static function drawBorder($im, $color, $thickness = 1)
     {
         $x1 = 0;

@@ -48,7 +48,7 @@ class PDF extends \FPDF
      */
     public function config()
     {
-        return include_once dirname(__FILE__) . '/../config/config.php';
+        return require (dirname(__FILE__) . '/../config/config.php');
     }
 
     public function header()
