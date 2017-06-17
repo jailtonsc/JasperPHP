@@ -45,6 +45,11 @@ class Image implements ElementInterface
     private $imageExpression;
 
     /**
+     * @var
+     */
+    private $removeImage;
+
+    /**
      * Rectangle constructor.
      * @param PDF $pdf
      * @param $elements
@@ -80,9 +85,11 @@ class Image implements ElementInterface
     private function addBorder($file)
     {
         if (isset($this->graphicElement['pen'])){
+            $this->removeImage = true;
             $imageSizeBorder = $this->graphicElement['pen']['@attributes']['lineWidth'];
             return ImageUtil::addBorder($file, $this->config['dirTmpImage'], $this->addColorBorder(), $imageSizeBorder);
         }
+        $this->removeImage = false;
         return $file;
     }
 
@@ -102,11 +109,13 @@ class Image implements ElementInterface
             $file = $this->addBorder($file);
 
             $this->pdf->Image($file, ($this->pdf->marginLeft + $x), ($this->pdf->position + $y), $width, $height);
+
+            if ($this->removeImage){
+                unlink($file);
+            }
         } catch (\Exception $e) {
             throw new JasperPHPException("Image not found for the specified path.");
         }
-
-        //unlink($file);
     }
 
     /**

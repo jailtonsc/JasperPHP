@@ -19,9 +19,38 @@ class Image
      */
     public static function addBorder($file, $fileTmp, $rgb = array(), $sizeBorder)
     {
-        if (self::isType($file)){
+        $name = '';
+        $type = self::type($file);
+
+        if (!self::isType($type)){
             throw new \Exception("Jasper contains images in an invalid format.");
         }
+
+        switch ($type) {
+            case 'jpeg':
+            case '.jpg':
+                $name = self::imageJPEG($file, $fileTmp, $rgb, $sizeBorder);
+                break;
+            case '.png':
+                $name = self::imagePNG($file, $fileTmp, $rgb, $sizeBorder);
+                break;
+            case '.gif':
+                $name = self::imageGIF($file, $fileTmp, $rgb, $sizeBorder);
+                break;
+        }
+
+        return $fileTmp . $name;
+    }
+
+    /**
+     * @param $file
+     * @param $fileTmp
+     * @param array $rgb
+     * @param $sizeBorder
+     * @return string
+     */
+    private static function imageJPEG($file, $fileTmp, $rgb = array(), $sizeBorder)
+    {
         $im = imagecreatefromjpeg($file);
         // Draw border
         $border = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
@@ -30,16 +59,65 @@ class Image
         $name = md5(uniqid()) . '-' . time() . '.jpg';
 
         imagejpeg($im, $fileTmp . $name);
-        return $fileTmp . $name;
+        return $name;
+    }
+
+    /**
+     * @param $file
+     * @param $fileTmp
+     * @param array $rgb
+     * @param $sizeBorder
+     * @return string
+     */
+    private static function imagePNG($file, $fileTmp, $rgb = array(), $sizeBorder)
+    {
+        $im = imagecreatefrompng($file);
+        // Draw border
+        $border = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
+        self::drawBorder($im, $border, $sizeBorder);
+
+        $name = md5(uniqid()) . '-' . time() . '.jpg';
+
+        imagepng($im, $fileTmp . $name);
+        return $name;
+    }
+
+    /**
+     * @param $file
+     * @param $fileTmp
+     * @param array $rgb
+     * @param $sizeBorder
+     * @return string
+     */
+    private static function imageGIF($file, $fileTmp, $rgb = array(), $sizeBorder)
+    {
+        $im = imagecreatefromgif($file);
+        // Draw border
+        $border = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
+        self::drawBorder($im, $border, $sizeBorder);
+
+        $name = md5(uniqid()) . '-' . time() . '.jpg';
+
+        imagegif($im, $fileTmp . $name);
+        return $name;
     }
 
     /**
      * @param $image
+     * @return bool|string
+     */
+    private static function type($image)
+    {
+        return substr($image, (strlen($image) -4), 4);
+    }
+
+    /**
+     * @param $ype
      * @return bool
      */
-    private static function isType($image)
+    private static function isType($ype)
     {
-        return in_array(substr($image, strlen($image), -4), array(
+        return in_array($ype, array(
             '.png',
             '.jpg',
             'jpeg',
