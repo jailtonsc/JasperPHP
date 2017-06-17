@@ -114,7 +114,7 @@ class Image implements ElementInterface
                 unlink($file);
             }
         } catch (\Exception $e) {
-            throw new JasperPHPException("Image not found for the specified path.");
+            throw new JasperPHPException('Image not found for the specified path.');
         }
     }
 

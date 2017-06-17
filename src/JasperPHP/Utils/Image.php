@@ -23,7 +23,7 @@ class Image
         $type = self::type($file);
 
         if (!self::isType($type)){
-            throw new \Exception("Jasper contains images in an invalid format.");
+            throw new \Exception('Jasper contains images in an invalid format.');
         }
 
         switch ($type) {
