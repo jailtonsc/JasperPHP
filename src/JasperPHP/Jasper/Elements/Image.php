@@ -69,11 +69,9 @@ class Image implements ElementInterface
     private function addColorBorder()
     {
         if (isset($this->reportElement['@attributes']['forecolor'])) {
-            $rgb = Color::HexToRGB($this->reportElement['@attributes']['forecolor']);
-        } else {
-            $rgb = $this->config['imageBorderRGB'];
+            return Color::HexToRGB($this->reportElement['@attributes']['forecolor']);
         }
-        return $rgb;
+        return $this->config['imageBorderRGB'];
     }
 
     /**
@@ -106,7 +104,9 @@ class Image implements ElementInterface
             $x = $this->reportElement['@attributes']['x'];
             $y = $this->reportElement['@attributes']['y'];
 
-            $file = $this->addBorder($file);
+            if (function_exists('imagejpeg')){
+                $file = $this->addBorder($file);
+            }
 
             $this->pdf->Image($file, ($this->pdf->marginLeft + $x), ($this->pdf->position + $y), $width, $height);
 
