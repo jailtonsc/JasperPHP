@@ -3,6 +3,7 @@
 namespace JasperPHP\Jasper\Elements;
 
 use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
+use JasperPHP\Jasper\Variable;
 use JasperPHP\PDF;
 
 class TextField extends TextAbstract implements ElementInterface
@@ -29,8 +30,8 @@ class TextField extends TextAbstract implements ElementInterface
         $height = 0;
         $text = '';
 
-        if (isset($element['text'])){
-            $text = $element['text'];
+        if (isset($element['textFieldExpression'])){
+            $text = $element['textFieldExpression'];
         }
 
         if (isset($element['reportElement'])){
@@ -40,7 +41,15 @@ class TextField extends TextAbstract implements ElementInterface
 
         $this->textColor($element);
         $this->pdf->SetFont($this->font($element), $this->bold($element), $this->size($element));
-        $this->pdf->Cell($width, $height, $text, $this->border($element), 0, $this->align($element), $this->backgroundColor($element));
+        $this->pdf->Cell(
+            $width,
+            $height,
+            utf8_decode((new Variable())->run($this->pdf, $text)),
+            $this->border($element),
+            0,
+            $this->align($element),
+            $this->backgroundColor($element)
+        );
     }
 
     /**

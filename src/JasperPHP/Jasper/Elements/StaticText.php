@@ -43,7 +43,15 @@ class StaticText extends TextAbstract implements ElementInterface
 
         $this->textColor($element);
         $this->pdf->SetFont($this->font($element), $this->bold($element), $this->size($element));
-        $this->pdf->Cell($width, $height, $text, $this->border($element), 0, $this->align($element), $this->backgroundColor($element));
+        $this->pdf->Cell(
+            $width,
+            $height,
+            utf8_decode($text),
+            $this->border($element),
+            0,
+            $this->align($element),
+            $this->backgroundColor($element)
+        );
     }
 
     /**
