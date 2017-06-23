@@ -9,7 +9,7 @@ use JasperPHP\PDF;
  * Class BandObstract
  * @package JasperPHP\Jasper\Bands
  */
-abstract class BandObstract
+abstract class BandAbstract
 {
     /**
      * @var PDF $pdf

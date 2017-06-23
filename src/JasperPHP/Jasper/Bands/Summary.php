@@ -8,7 +8,7 @@ use JasperPHP\PDF;
  * Class Summary
  * @package JasperPHP\Jasper\Bands
  */
-class Summary extends BandObstract
+class Summary extends BandAbstract
 {
     /**
      * Title constructor.

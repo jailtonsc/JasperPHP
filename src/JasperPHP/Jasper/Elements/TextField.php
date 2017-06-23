@@ -5,12 +5,9 @@ namespace JasperPHP\Jasper\Elements;
 use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
 use JasperPHP\PDF;
 
-/**
- * Class StaticText
- * @package JasperPHP\Jasper\Elements
- */
-class StaticText extends TextAbstract implements ElementInterface
+class TextField extends TextAbstract implements ElementInterface
 {
+
     /**
      * StaticText constructor.
      * @param PDF $pdf

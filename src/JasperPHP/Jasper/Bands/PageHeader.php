@@ -8,7 +8,7 @@ use JasperPHP\PDF;
  * Class PageHeader
  * @package JasperPHP\Jasper\Bands
  */
-class PageHeader extends BandObstract
+class PageHeader extends BandAbstract
 {
     /**
      * Title constructor.

@@ -42,6 +42,27 @@ class PDF extends \FPDF
     public $title;
 
     /**
+     * Collection of data that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $data = array();
+
+    /**
+     * Collection of parameters that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $parameters = array();
+
+    /**
+     * Collection of variables that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $variables  = array();
+
+    /**
      * get config params
      *
      * @return mixed

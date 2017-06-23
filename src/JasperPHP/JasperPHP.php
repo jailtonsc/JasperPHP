@@ -32,6 +32,27 @@ class JasperPHP
     public $jasperPath;
 
     /**
+     * Collection of data that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $data = array();
+
+    /**
+     * Collection of parameters that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $parameters = array();
+
+    /**
+     * Collection of variables that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $variables  = array();
+
+    /**
      * JasperPHP constructor.
      */
     public function __construct()
@@ -77,12 +98,21 @@ class JasperPHP
         }
     }
 
+    private function addVariables()
+    {
+        $this->pdf->data = $this->data;
+        $this->pdf->parameters = $this->parameters;
+        $this->pdf->variables = $this->variables;
+    }
+
     /**
      * Generate pdf
      */
     public function generatePdf()
     {
         $this->jasper = XmlToArray::xmlToArray($this->jasperPath);
+
+        $this->addVariables();
 
         $this->pageHeader();
 
