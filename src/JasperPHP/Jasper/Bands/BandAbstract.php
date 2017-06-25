@@ -15,6 +15,7 @@ abstract class BandAbstract
      * @var PDF $pdf
      */
     protected $pdf;
+
     /**
      * @var
      */
@@ -51,6 +52,16 @@ abstract class BandAbstract
     protected function reportHeightBand()
     {
         $this->pdf->heightBandPrevious = $this->band['band']['@attributes']['height'];
+    }
+
+    /**
+     * Informs the name of the band for any calculations
+     *
+     * @param $nameBand
+     */
+    protected function setNameBand($nameBand)
+    {
+        $this->pdf->nameBand = $nameBand;
     }
 
     /**

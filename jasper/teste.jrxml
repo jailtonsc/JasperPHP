@@ -5,7 +5,10 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="P_TESTE" class="java.lang.String"/>
 	<field name="variavel1" class="java.lang.String"/>
-	<variable name="V_TESTE" class="java.lang.String"/>
+	<variable name="V_TESTE" class="java.lang.Integer" resetType="Column" calculation="Count">
+		<variableExpression><![CDATA[$P{P_TESTE}]]></variableExpression>
+		<initialValueExpression><![CDATA["0"]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

@@ -11,6 +11,11 @@ use JasperPHP\PDF;
 class ColumnHeader extends BandAbstract
 {
     /**
+     * Name Band
+     */
+    const NAME_BAND = 'ColumnHeader';
+
+    /**
      * Title constructor.
      * @param PDF $pdf
      * @param $band
@@ -26,6 +31,7 @@ class ColumnHeader extends BandAbstract
      */
     public function run()
     {
+        $this->setNameBand(self::NAME_BAND);
         $this->adjustPosition();
         $this->runElement();
         $this->reportHeightBand();

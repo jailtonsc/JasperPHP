@@ -46,13 +46,6 @@ class JasperPHP
     public $parameters = array();
 
     /**
-     * Collection of variables that will be displayed in the pdf
-     *
-     * @var array
-     */
-    public $variables  = array();
-
-    /**
      * JasperPHP constructor.
      */
     public function __construct()
@@ -90,19 +83,35 @@ class JasperPHP
 
     }
 
+    /**
+     * Mounts the page header
+     */
     private function pageHeader()
     {
         if (isset($this->jasper['pageHeader'])){
+            $this->pdf->heightBandPrevious += $this->jasper['title']['band']['@attributes']['height'];
             $this->pdf->pageHeader = $this->jasper['pageHeader'];
-            $this->pdf->title = $this->jasper['title'];
         }
     }
 
+    /**
+     * Adds all types of variables
+     */
     private function addVariables()
     {
         $this->pdf->data = $this->data;
         $this->pdf->parameters = $this->parameters;
-        $this->pdf->variables = $this->variables;
+        $this->variable();
+    }
+
+    /**
+     * Informs all variables
+     */
+    private function variable()
+    {
+        if (isset($this->jasper['variable'])){
+            $this->pdf->variables = $this->jasper['variable'];
+        }
     }
 
     /**
@@ -111,9 +120,9 @@ class JasperPHP
     public function generatePdf()
     {
         $this->jasper = XmlToArray::xmlToArray($this->jasperPath);
-
         $this->addVariables();
 
+        //$this->title();
         $this->pageHeader();
 
         $this->page();
