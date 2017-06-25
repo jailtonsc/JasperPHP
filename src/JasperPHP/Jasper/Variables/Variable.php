@@ -35,7 +35,7 @@ class Variable implements VariablesInterface
      */
     public function text()
     {
-        die(print_r($this->pdf->variables));
+        //die(print_r($this->pdf->variables));
         /*
         if (!isset($this->pdf->variables[$this->variable])){
             throw new JasperPHPException("'" . $this->variable . "' variable was not reported on JasperPHP.");
