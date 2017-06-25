@@ -1,5 +1,6 @@
 <?php
 namespace JasperPHP\Factory;
+
 use JasperPHP\Jasper\Variables\Field;
 use JasperPHP\Jasper\Variables\Parameter;
 use JasperPHP\Jasper\Variables\Variable;

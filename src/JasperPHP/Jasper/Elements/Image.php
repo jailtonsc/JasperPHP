@@ -4,6 +4,7 @@ namespace JasperPHP\Jasper\Elements;
 
 use JasperPHP\Exception\JasperPHPException;
 use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
+use JasperPHP\Jasper\Variable;
 use JasperPHP\PDF;
 use JasperPHP\Utils\Color;
 use JasperPHP\Utils\Image as ImageUtil;
@@ -98,6 +99,9 @@ class Image implements ElementInterface
     {
         try {
             $file = str_replace("\"", "", $this->imageExpression);
+
+            $variable = new Variable();
+            $file = $variable->run($this->pdf, $file);
 
             $width = $this->reportElement['@attributes']['width'];
             $height = $this->reportElement['@attributes']['height'];

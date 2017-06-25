@@ -43,6 +43,6 @@ class Variable
         if (!empty($object)){
             return $object->text();
         }
-        return null;
+        return $variable;
     }
 }

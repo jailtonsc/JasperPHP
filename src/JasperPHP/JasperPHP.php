@@ -122,7 +122,6 @@ class JasperPHP
         $this->jasper = XmlToArray::xmlToArray($this->jasperPath);
         $this->addVariables();
 
-        //$this->title();
         $this->pageHeader();
 
         $this->page();
