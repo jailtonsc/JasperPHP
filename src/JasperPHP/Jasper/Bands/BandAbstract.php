@@ -9,12 +9,13 @@ use JasperPHP\PDF;
  * Class BandObstract
  * @package JasperPHP\Jasper\Bands
  */
-abstract class BandObstract
+abstract class BandAbstract
 {
     /**
      * @var PDF $pdf
      */
     protected $pdf;
+
     /**
      * @var
      */
@@ -40,7 +41,7 @@ abstract class BandObstract
         if ($page == 1 && isset($this->pdf->title['band']['@attributes']['height'])){
             $this->pdf->position += ($this->pdf->heightBandPrevious + $this->pdf->title['band']['@attributes']['height']);
         } else {
-            $this->pdf->position += $this->pdf->heightBandPrevious;
+            $this->pdf->position += ($this->pdf->heightBandPrevious + $this->pdf->pageHeader['band']['@attributes']['height']);
         }
 
     }
@@ -51,6 +52,16 @@ abstract class BandObstract
     protected function reportHeightBand()
     {
         $this->pdf->heightBandPrevious = $this->band['band']['@attributes']['height'];
+    }
+
+    /**
+     * Informs the name of the band for any calculations
+     *
+     * @param $nameBand
+     */
+    protected function setNameBand($nameBand)
+    {
+        $this->pdf->nameBand = $nameBand;
     }
 
     /**

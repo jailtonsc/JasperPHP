@@ -3,14 +3,12 @@
 namespace JasperPHP\Jasper\Elements;
 
 use JasperPHP\Jasper\Elements\Contracts\ElementInterface;
+use JasperPHP\Jasper\Variable;
 use JasperPHP\PDF;
 
-/**
- * Class StaticText
- * @package JasperPHP\Jasper\Elements
- */
-class StaticText extends TextAbstract implements ElementInterface
+class TextField extends TextAbstract implements ElementInterface
 {
+
     /**
      * StaticText constructor.
      * @param PDF $pdf
@@ -32,8 +30,8 @@ class StaticText extends TextAbstract implements ElementInterface
         $height = 0;
         $text = '';
 
-        if (isset($element['text'])){
-            $text = $element['text'];
+        if (isset($element['textFieldExpression'])){
+            $text = $element['textFieldExpression'];
         }
 
         if (isset($element['reportElement'])){
@@ -46,7 +44,7 @@ class StaticText extends TextAbstract implements ElementInterface
         $this->pdf->Cell(
             $width,
             $height,
-            utf8_decode($text),
+            utf8_decode((new Variable())->run($this->pdf, $text)),
             $this->border($element),
             0,
             $this->align($element),

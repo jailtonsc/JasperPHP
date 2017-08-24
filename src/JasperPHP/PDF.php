@@ -27,6 +27,7 @@ class PDF extends \FPDF
 
     /**
      * Height of the previous band
+     *
      * @var
      */
     public $heightBandPrevious;
@@ -42,15 +43,46 @@ class PDF extends \FPDF
     public $title;
 
     /**
+     * Collection of data that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $data = array();
+
+    /**
+     * Collection of parameters that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $parameters = array();
+
+    /**
+     * Collection of variables that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $variables  = array();
+
+    /**
+     * Variable that contains the name of the band for any calculations
+     *
+     * @var string
+     */
+    public $nameBand;
+
+    /**
      * get config params
      *
      * @return mixed
      */
     public function config()
     {
-        return include_once dirname(__FILE__) . '/../config/config.php';
+        return require (dirname(__FILE__) . '/../config/config.php');
     }
 
+    /**
+     * Mounts the page header
+     */
     public function header()
     {
         if (isset($this->pageHeader)) {
@@ -59,6 +91,9 @@ class PDF extends \FPDF
         }
     }
 
+    /**
+     * Mounts the page footer
+     */
     public function footer()
     {
     }

@@ -8,8 +8,13 @@ use JasperPHP\PDF;
  * Class Detail
  * @package JasperPHP\Jasper\Bands
  */
-class Detail extends BandObstract
+class Detail extends BandAbstract
 {
+    /**
+     * Name Band
+     */
+    const NAME_BAND = 'Detail';
+
     /**
      * Title constructor.
      * @param PDF $pdf
@@ -26,6 +31,7 @@ class Detail extends BandObstract
      */
     public function run()
     {
+        $this->setNameBand(self::NAME_BAND);
         $this->adjustPosition();
         $this->runElement();
         $this->reportHeightBand();

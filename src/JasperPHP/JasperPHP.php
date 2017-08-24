@@ -32,6 +32,20 @@ class JasperPHP
     public $jasperPath;
 
     /**
+     * Collection of data that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $data = array();
+
+    /**
+     * Collection of parameters that will be displayed in the pdf
+     *
+     * @var array
+     */
+    public $parameters = array();
+
+    /**
      * JasperPHP constructor.
      */
     public function __construct()
@@ -59,7 +73,7 @@ class JasperPHP
         $pageWidth = $this->jasper['@attributes']['pageWidth'];
         $pageHeight = $this->jasper['@attributes']['pageHeight'];
 
-        $size = [$pageHeight, $pageWidth];
+        $size = array($pageHeight, $pageWidth);
 
         if (isset($this->jasper['@attributes']['orientation']) && $this->jasper['@attributes']['orientation'] == 'Landscape'){
             $this->pdf->addPage('L', $size);
@@ -69,11 +83,34 @@ class JasperPHP
 
     }
 
+    /**
+     * Mounts the page header
+     */
     private function pageHeader()
     {
         if (isset($this->jasper['pageHeader'])){
+            $this->pdf->heightBandPrevious += $this->jasper['title']['band']['@attributes']['height'];
             $this->pdf->pageHeader = $this->jasper['pageHeader'];
-            $this->pdf->title = $this->jasper['title'];
+        }
+    }
+
+    /**
+     * Adds all types of variables
+     */
+    private function addVariables()
+    {
+        $this->pdf->data = $this->data;
+        $this->pdf->parameters = $this->parameters;
+        $this->variable();
+    }
+
+    /**
+     * Informs all variables
+     */
+    private function variable()
+    {
+        if (isset($this->jasper['variable'])){
+            $this->pdf->variables = $this->jasper['variable'];
         }
     }
 
@@ -83,6 +120,7 @@ class JasperPHP
     public function generatePdf()
     {
         $this->jasper = XmlToArray::xmlToArray($this->jasperPath);
+        $this->addVariables();
 
         $this->pageHeader();
 
@@ -91,7 +129,6 @@ class JasperPHP
 
         $band = new Band($this->pdf, $this->jasper);
         $band->run();
-        //die();
         $this->pdf->Output();
     }
 }

@@ -8,8 +8,13 @@ use JasperPHP\PDF;
  * Class PageHeader
  * @package JasperPHP\Jasper\Bands
  */
-class PageHeader extends BandObstract
+class PageHeader extends BandAbstract
 {
+    /**
+     * Name Band
+     */
+    const NAME_BAND = 'PageHeader';
+
     /**
      * Title constructor.
      * @param PDF $pdf
@@ -28,8 +33,8 @@ class PageHeader extends BandObstract
     {
         $page = $this->pdf->PageNo();
 
-        if ($page == 1 && isset($this->pdf->title['band']['@attributes']['height'])){
-            $this->pdf->position += ($this->pdf->heightBandPrevious  + $this->pdf->title['band']['@attributes']['height']);
+        if ($page == 1){
+            $this->pdf->position += $this->pdf->heightBandPrevious;
         } else {
             $this->pdf->position = $this->pdf->marginTop;
         }
@@ -52,6 +57,7 @@ class PageHeader extends BandObstract
      */
     public function run()
     {
+        $this->setNameBand(self::NAME_BAND);
         $this->adjustPosition();
         $this->runElement();
         $this->reportHeightBand();

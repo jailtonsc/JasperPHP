@@ -8,8 +8,13 @@ use JasperPHP\PDF;
  * Class PageFooter
  * @package JasperPHP\Jasper\Bands
  */
-class PageFooter extends BandObstract
+class PageFooter extends BandAbstract
 {
+    /**
+     * Name Band
+     */
+    const NAME_BAND = 'PageFooter';
+
     /**
      * Title constructor.
      * @param PDF $pdf
@@ -26,6 +31,7 @@ class PageFooter extends BandObstract
      */
     public function run()
     {
+        $this->setNameBand(self::NAME_BAND);
         $this->adjustPosition();
         $this->runElement();
         $this->reportHeightBand();
